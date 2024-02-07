@@ -16,12 +16,19 @@ protocol IEndpoint {
     var encoding: ParameterEncoding { get }
 }
 
-enum AnimalEndpoint {
+enum NewsEndpoint {
+    case getNewsSources(category: CategoryState)
+    case getNewsArticles(sourceID: String)
 }
 
-extension AnimalEndpoint: IEndpoint {
+extension NewsEndpoint: IEndpoint {
     var path: String {
-        return .empty
+        switch self {
+        case .getNewsSources(let category):
+            return SC.baseURLNews + "sources?" + "category=\(category)&" + SC.apiKey
+        case .getNewsArticles(let sourceID):
+            return SC.baseURLNews + "top-headlines?" + "sources=\(sourceID)&" + SC.apiKey
+        }
     }
 
     var parameter: Parameters? {
@@ -40,4 +47,3 @@ extension AnimalEndpoint: IEndpoint {
         return .get
     }
 }
-

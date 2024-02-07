@@ -34,10 +34,10 @@ enum ModuleConfigurator {
 
     // MARK: News Sources
 
-    static func NewsSourceConfigureModule() -> NewsSourceViewController {
+    static func NewsSourceConfigureModule(parameters: [String: Any]) -> NewsSourceViewController {
         let controller = NewsSourceViewController()
         let router = NewsSourceRouter(viewController: controller)
-        let presenter = NewsSourcePresenter()
+        let presenter = NewsSourcePresenter(parameters: parameters)
         let apiService = APIService()
 
         let interactor = NewsSourceInteractor(
@@ -58,10 +58,10 @@ enum ModuleConfigurator {
 
     // MARK: News Articles
 
-    static func NewsArticlesConfigureModule() -> NewsArticlesViewController {
+    static func NewsArticlesConfigureModule(parameters: [String: Any]) -> NewsArticlesViewController {
         let controller = NewsArticlesViewController()
         let router = NewsArticlesRouter(viewController: controller)
-        let presenter = NewsArticlesPresenter()
+        let presenter = NewsArticlesPresenter(parameters: parameters)
         let apiService = APIService()
 
         let interactor = NewsArticlesInteractor(
@@ -81,10 +81,10 @@ enum ModuleConfigurator {
 
     // MARK: Article Detail
 
-    static func ArticleDetailConfigureModule() -> ArticleDetailViewController {
+    static func ArticleDetailConfigureModule(parameters: [String: Any]) -> ArticleDetailViewController {
         let controller = ArticleDetailViewController()
         let router = ArticleDetailRouter(viewController: controller)
-        let presenter = ArticleDetailPresenter()
+        let presenter = ArticleDetailPresenter(parameters: parameters)
         let apiService = APIService()
 
         let interactor = ArticleDetailInteractor(

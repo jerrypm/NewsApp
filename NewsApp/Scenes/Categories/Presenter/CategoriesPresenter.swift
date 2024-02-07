@@ -13,6 +13,7 @@ protocol ICategoriesPresenter: AnyObject {
     var view: ICategoriesViewController? { get set }
 
     func viewDidLoad()
+    func navigateToSources(category: CategoryState)
 }
 
 class CategoriesPresenter: ICategoriesPresenter {
@@ -20,7 +21,9 @@ class CategoriesPresenter: ICategoriesPresenter {
     var router: ICategoriesRouter?
     var interactor: ICategoriesInteractor?
 
-    func viewDidLoad() {
-        #warning("here")
+    func viewDidLoad() {}
+    
+    func navigateToSources(category: CategoryState) {
+        router?.navigateToSources(category: category)
     }
 }

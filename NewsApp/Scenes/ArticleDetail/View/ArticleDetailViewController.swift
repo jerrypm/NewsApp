@@ -6,17 +6,28 @@
 //
 
 import UIKit
+import WebKit
 
-protocol IArticleDetailViewController: AnyObject {}
+protocol IArticleDetailViewController: AnyObject {
+    func loadURL(_ url: URL)
+}
 
-class ArticleDetailViewController: UIViewController {
+class ArticleDetailViewController: DefaultController {
+    @IBOutlet weak var webView: WKWebView!
     var presenter: IArticleDetailPresenter?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = presenter?.title
         presenter?.viewDidLoad()
     }
 }
 
-extension ArticleDetailViewController: IArticleDetailViewController {}
+extension ArticleDetailViewController: IArticleDetailViewController {
+    func loadURL(_ url: URL) {
+        let request = URLRequest(url: url)
+        DispatchQueue.main.async {
+            self.webView.load(request)
+        }
+    }
+}
